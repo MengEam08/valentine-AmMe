@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap');
+
+        body {
+            background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+        }
+
+        .cursive {
+            font-family: 'Dancing+Script', cursive;
+        }
+
+        /* Tulip Growth Animations */
+        @keyframes growStem {
+            from { stroke-dashoffset: 120; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes growLeaf {
+            from { transform: scale(0) rotate(-10deg); opacity: 0; }
+            to { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes bloomTulip {
+            0% { transform: scale(0) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        @keyframes petalSpreadLeft {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-15deg); }
+        }
+
+        @keyframes petalSpreadRight {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(15deg); }
+        }
+
+        .stem {
+            stroke-dasharray: 120;
+            stroke-dashoffset: 120;
+            animation: growStem 1.5s ease-out forwards;
+        }
+
+        .leaf-left {
+            transform-origin: bottom right;
+            animation: growLeaf 1s ease-out 0.8s forwards;
+            opacity: 0;
+        }
+
+        .leaf-right {
+            transform-origin: bottom left;
+            animation: growLeaf 1s ease-out 1.2s forwards;
+            opacity: 0;
+        }
+
+        .tulip-head {
+            transform-origin: center bottom;
+            animation: bloomTulip 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.5s forwards;
+            opacity: 0;
+        }
+
+        .petal-left {
+            transform-origin: bottom center;
+            animation: petalSpreadLeft 1.5s ease-in-out 2.5s infinite alternate;
+        }
+
+        .petal-right {
+            transform-origin: bottom center;
+            animation: petalSpreadRight 1.5s ease-in-out 2.5s infinite alternate;
+        }
+
+        /* Background Effects */
+        .falling-element {
+            position: absolute;
+            color: #e8203e;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.4; }
+            80% { opacity: 0.4; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .card-container {
+            animation: slideUp 1s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .hidden-page {
+            display: none !important;
+        }
+
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+        }
+        
+        .cat-img {
+            max-width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .qr-container {
+            width: 260px;
+            height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .qr-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div id="bg-overlay"></div>
+
+    <!-- Main Page: Tulip Garden -->
+    <div id="page-garden" class="card-container relative z-10 text-center bg-white/60 backdrop-blur-lg p-10 md:p-14 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/40 max-w-lg w-full">
+        <div class="mb-6 flex justify-center items-end gap-2">
+            <!-- Left Tulip -->
+            <svg width="80" height="120" viewBox="0 0 200 220" class="opacity-80 scale-75 transform -rotate-12">
+                <path class="stem" d="M100 210 Q100 160 100 100" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" />
+                <path class="leaf-left" d="M100 190 Q70 180 60 140 Q85 160 100 190" fill="#16a34a" />
+                <g class="tulip-head" style="animation-delay: 1.8s">
+                    <path d="M100 105 Q100 55 100 55 Q130 55 100 105" fill="#be123c" />
+                    <path d="M100 105 Q70 100 70 70 Q70 40 100 55 L100 105" fill="#e11d48" />
+                    <path d="M100 105 Q130 100 130 70 Q130 40 100 55 L100 105" fill="#f43f5e" />
+                    <path d="M100 105 Q85 100 85 75 Q85 50 100 45 Q115 50 115 75 Q115 100 100 105" fill="#fb7185" />
+                </g>
+            </svg>
+            <!-- Center Tulip -->
+            <svg width="140" height="180" viewBox="0 0 200 220" class="z-10">
+                <path class="stem" d="M100 210 Q100 160 100 100" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" />
+                <path class="leaf-left" d="M100 190 Q70 180 60 140 Q85 160 100 190" fill="#16a34a" />
+                <path class="leaf-right" d="M100 200 Q130 190 140 150 Q115 170 100 200" fill="#15803d" />
+                <g class="tulip-head">
+                    <path d="M100 105 Q100 55 100 55 Q130 55 100 105" fill="#be123c" />
+                    <path class="petal-left" d="M100 105 Q70 100 70 70 Q70 40 100 55 L100 105" fill="#e11d48" />
+                    <path class="petal-right" d="M100 105 Q130 100 130 70 Q130 40 100 55 L100 105" fill="#f43f5e" />
+                    <path d="M100 105 Q85 100 85 75 Q85 50 100 45 Q115 50 115 75 Q115 100 100 105" fill="#fb7185" />
+                </g>
+            </svg>
+            <!-- Right Tulip -->
+            <svg width="80" height="120" viewBox="0 0 200 220" class="opacity-80 scale-75 transform rotate-12">
+                <path class="stem" d="M100 210 Q100 160 100 100" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" />
+                <path class="leaf-right" d="M100 200 Q130 190 140 150 Q115 170 100 200" fill="#15803d" />
+                <g class="tulip-head" style="animation-delay: 2.1s">
+                    <path d="M100 105 Q100 55 100 55 Q130 55 100 105" fill="#be123c" />
+                    <path d="M100 105 Q70 100 70 70 Q70 40 100 55 L100 105" fill="#e11d48" />
+                    <path d="M100 105 Q130 100 130 70 Q130 40 100 55 L100 105" fill="#f43f5e" />
+                    <path d="M100 105 Q85 100 85 75 Q85 50 100 45 Q115 50 115 75 Q115 100 100 105" fill="#fb7185" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-rose-400 text-lg font-semibold tracking-[0.3em] uppercase">Happy</h2>
+            <h1 class="text-rose-600 text-6xl cursive drop-shadow-md">Valentine's Day</h1>
+            <p class="text-gray-600 italic mt-8 px-6 text-lg leading-relaxed">
+                "Wishing you a special day filled with love and joy. 💖"
+            </p>
+            <div class="pt-8 flex justify-center gap-6 text-rose-300">
+                <i class="fas fa-heart animate-pulse"></i>
+                <i class="fas fa-sparkles text-sm"></i>
+                <i class="fas fa-heart animate-pulse" style="animation-delay: 0.5s"></i>
+            </div>
+            <p class="text-gray-600 italic mt-8 px-6 text-lg leading-relaxed">AmMe</p>
+        </div>
+
+        <button onclick="goToQRCode()" class="mt-12 bg-rose-500 hover:bg-rose-600 text-white px-10 py-4 rounded-full transition-all transform hover:scale-105 active:scale-95 shadow-xl flex items-center gap-3 mx-auto font-bold uppercase tracking-wider">
+            <span>Unlock My Secret</span>
+            <i class="fas fa-qrcode text-sm"></i>
+        </button>
+    </div>
+
+    <!-- QR Code Page -->
+    <div id="page-qrcode" class="hidden-page card-container relative z-10 text-center bg-white/80 backdrop-blur-lg p-10 md:p-14 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/40 max-w-lg w-full">
+        <h1 class="text-rose-600 text-4xl cursive mb-8">Scan to Give a Gift</h1>
+        <div class="bg-white p-4 rounded-2xl shadow-inner inline-block mb-8 border-4 border-rose-100 relative overflow-hidden">
+            <div class="qr-container">
+                <!-- I have used a generic placeholder for your KHQR image since I cannot host files. 
+                     You can replace this URL with your hosted KHQR image URL. -->
+                <img id="real-qr-image" src="/images/qrCode.jpg" alt="Valentine QR Code">
+            </div>
+        </div>
+        <p class="text-gray-600 mb-8 px-4 leading-relaxed">Valentine's gift PLS! ❤️</p>
+        <button onclick="showGiftModal()" class="text-rose-500 hover:text-rose-700 font-bold underline transition-colors flex items-center justify-center mx-auto gap-2">
+            <i class="fas fa-gift mr-2"></i> I'm done sending gift
+        </button>
+    </div>
+
+    <!-- Success Page (Happy Cat) -->
+    <div id="page-success" class="hidden-page card-container relative z-10 text-center bg-white/90 backdrop-blur-lg p-10 md:p-14 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/40 max-w-lg w-full">
+        <h1 class="text-rose-600 text-4xl cursive mb-6">Yay! Thank You!</h1>
+        <div class="mb-8">
+            <!-- Updated with the Smiling Cat image you uploaded -->
+            <img src="/images/smile.jpg" alt="Happy Cat" class="cat-img mx-auto border-4 border-rose-200">
+        </div>
+        <p class="text-gray-600 text-lg mb-8">You made my heart bloom today!</p>
+        <button onclick="goToGardenFromSuccess()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-8 rounded-full transition-all shadow-md">
+            Back to Garden
+        </button>
+    </div>
+
+    <!-- Sad Cat Page (Wait Screen) -->
+    <div id="page-sad" class="hidden-page card-container relative z-10 text-center bg-white/90 backdrop-blur-lg p-10 md:p-14 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/40 max-w-lg w-full">
+        <h1 class="text-rose-600 text-4xl cursive mb-6">Oh no... not yet?</h1>
+        <div class="mb-8">
+            <img src="/images/sad.jpg" alt="Sad Cat Meme" class="cat-img mx-auto border-4 border-gray-200">
+        </div>
+        <p class="text-gray-600 text-lg mb-8">Please finish it first! I'm waiting! 🥺</p>
+        <button onclick="goBackToQRFromSad()" class="bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-8 rounded-full transition-all shadow-md">
+            Try again!
+        </button>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="gift-modal" class="hidden-page fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center border-2 border-rose-100 transform scale-100 transition-transform">
+            <div class="text-rose-500 text-5xl mb-4">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Check Progress</h3>
+            <p class="text-gray-600 mb-8">Did you finish sending the gift to me?</p>
+            <div class="flex flex-col gap-3">
+                <button onclick="confirmGiftSent(true)" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 rounded-xl transition-all shadow-md">
+                    Yes, I sent it!
+                </button>
+                <button onclick="confirmGiftSent(false)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl transition-all">
+                    Not yet
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * IMPORTANT: 
+         * To show your real QR code, you need to upload your image to a service like PostImages or Imgur 
+         * and paste the DIRECT LINK here.
+         */
+        const MY_REAL_QR_URL = "https://via.placeholder.com/300x400?text=Paste+Your+KHQR+Direct+Link+Here";
+        
+        // Update the QR image source
+        const qrImg = document.getElementById('real-qr-image');
+        if (MY_REAL_QR_URL && !MY_REAL_QR_URL.includes("placeholder")) {
+            qrImg.src = MY_REAL_QR_URL;
+        }
+
+        function createFallingElement() {
+            const container = document.getElementById('bg-overlay');
+            const el = document.createElement('i');
+            const icons = ['fa-star', 'fa-sparkle', 'fa-heart'];
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            el.className = `fas ${randomIcon} falling-element`;
+            const startX = Math.random() * 100;
+            const size = Math.random() * 10 + 10;
+            const duration = Math.random() * 4 + 6;
+            const delay = Math.random() * 2;
+            el.style.left = startX + 'vw';
+            el.style.fontSize = size + 'px';
+            el.style.animationDuration = duration + 's';
+            el.style.animationDelay = delay + 's';
+            container.appendChild(el);
+            setTimeout(() => { el.remove(); }, (duration + delay) * 1000);
+        }
+
+        for(let i = 0; i < 20; i++) createFallingElement();
+        setInterval(createFallingElement, 1000);
+
+        function goToQRCode() {
+            document.getElementById('page-garden').classList.add('hidden-page');
+            document.getElementById('page-qrcode').classList.remove('hidden-page');
+            for(let i = 0; i < 15; i++) setTimeout(createFallingElement, i * 100);
+        }
+
+        function showGiftModal() {
+            document.getElementById('gift-modal').classList.remove('hidden-page');
+        }
+
+        function confirmGiftSent(isSent) {
+            document.getElementById('gift-modal').classList.add('hidden-page');
+            if (isSent) {
+                document.getElementById('page-qrcode').classList.add('hidden-page');
+                document.getElementById('page-success').classList.remove('hidden-page');
+                for(let i = 0; i < 40; i++) setTimeout(createFallingElement, i * 40);
+            } else {
+                document.getElementById('page-qrcode').classList.add('hidden-page');
+                document.getElementById('page-sad').classList.remove('hidden-page');
+            }
+        }
+
+        function goBackToQRFromSad() {
+            document.getElementById('page-sad').classList.add('hidden-page');
+            document.getElementById('page-qrcode').classList.remove('hidden-page');
+        }
+
+        function goToGardenFromSuccess() {
+            document.getElementById('page-success').classList.add('hidden-page');
+            document.getElementById('page-garden').classList.remove('hidden-page');
+        }
+    </script>
+</body>
+</html>
